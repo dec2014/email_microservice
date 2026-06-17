@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import generics
-from .service import EmailVerification
+from .service import EmailVerification,TempEmployeeCredentials
 from rest_framework.decorators import api_view
 # Create your views here.
 
@@ -9,3 +9,8 @@ from rest_framework.decorators import api_view
 def email_verification(request):
     return EmailVerification(request)
 
+
+
+@api_view(['POST'])
+def temp_details(request):
+    return TempEmployeeCredentials(request)

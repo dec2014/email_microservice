@@ -8,6 +8,9 @@ from rest_framework.response import Response
 @csrf_exempt
 def EmailVerification(request):
     try:
+
+
+
         data=json.loads(request.body)
         subject=data.get('subject')
         body=data.get('body')
@@ -20,15 +23,16 @@ def EmailVerification(request):
 
 
 
-
-def TempEmployeeCredentials(email,password):
+@csrf_exempt
+def TempEmployeeCredentials(request):
     try:
-        subject='Login credentials'
-        body=f'your credentials are email:{email},password:{password}'
-        email_from=settings.DEFAULT_FROM_EMAIL
-        reciptent_list=[email]
+        data=json.loads(request.body)
+        subject=data.get('subject')
+        body=data.get('body')
+        email_from=data.get('email_from')
+        recipient_list=data.get('recipient_list')
     
-        send_mail(subject,body,email_from,reciptent_list)
+        send_mail(subject,body,email_from,recipient_list)
     except Exception as e:
         raise ValidationError(f'the email could not be sent.{str(e)}')
 
